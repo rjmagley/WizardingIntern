@@ -25,9 +25,9 @@ class WizardingInternFamiliar(FarmiliarSkill):
 
     def get_description(self):
         description = (f"Every {self.counter_max} turns, summon a wizard intern if you do not currently have one.\n"
-                            "The intern has a simple arcane ranged attack.\n"
-                            "The familiar can cast your sorcery cantrips on a 7 turn cooldown.\n"
-                            "Every time your intern dies, the next intern takes three turns longer to summon.\n")
+            "The intern has a simple arcane ranged attack.\n"
+            "The intern can cast your sorcery cantrips on a 7 turn cooldown.\n"
+            "Every time your intern dies, the next intern takes three turns longer to summon.\n")
         
         if self.counter != self.counter_max:
             description += f"Next intern arrives in {self.counter} turns.\n"
