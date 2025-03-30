@@ -21,6 +21,7 @@ class WizardingInternFamiliar(FarmiliarSkill):
         self.name = "Wizarding Intern"
         self.level = 4
         self.tags = [Tags.Conjuration]
+        self.asset = ["WizardingIntern", "intern_icon"]
 
     def get_description(self):
         description = (f"Every {self.counter_max} turns, summon a wizard intern if you do not currently have one.\n"
