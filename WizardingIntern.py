@@ -19,12 +19,19 @@ class WizardingInternFamiliar(FarmiliarSkill):
         self.minion_range = 10
 
         self.name = "Wizarding Intern"
-        self.description = ("Every [{counter_max}:minion_duration] turns, summon a wizard intern if you do not currently have one.\n"
-                            "The intern has a simple arcane ranged attack.\n"
-                            "The familiar can cast your sorcery cantrips on a 7 turn cooldown.\n"
-                            "Every time your intern dies, the next intern takes three turns longer to summon.").format(counter_max = self.counter_max)
         self.level = 4
         self.tags = [Tags.Conjuration]
+
+    def get_description(self):
+        description = (f"Every {self.counter_max} turns, summon a wizard intern if you do not currently have one.\n"
+                            "The intern has a simple arcane ranged attack.\n"
+                            "The familiar can cast your sorcery cantrips on a 7 turn cooldown.\n"
+                            "Every time your intern dies, the next intern takes three turns longer to summon.\n")
+        
+        if self.counter != self.counter_max:
+            description += f"Next intern arrives in {self.counter} turns.\n"
+        
+        return description
 
     def get_extra_examine_tooltips(self):
         return [WizardingIntern()]
@@ -46,19 +53,11 @@ class WizardingInternFamiliar(FarmiliarSkill):
     
     def summon_farmiliar(self):
         self.counter_max += 3
-        self.description = ("Every [{counter_max}:minion_duration] turns, summon a wizard intern if you do not currently have one.\n"
-                            "The intern has a simple arcane ranged attack.\n"
-                            "The familiar can cast your sorcery cantrips on a 7 turn cooldown.\n"
-                            "Every time your intern dies, the next intern takes three turns longer to summon.").format(counter_max = self.counter_max)
         return super().summon_farmiliar()
     
     def on_enter_level(self, evt):
         self.counter_max = 10
         self.counter = 10
-        self.description = self.description = ("Every [{counter_max}:minion_duration] turns, summon a wizard intern if you do not currently have one.\n"
-                            "The intern has a simple arcane ranged attack.\n"
-                            "The familiar can cast your sorcery cantrips on a 7 turn cooldown.\n"
-                            "Every time your intern dies, the next intern takes three turns longer to summon.").format(counter_max = self.counter_max)
         
 
 def WizardingIntern():
